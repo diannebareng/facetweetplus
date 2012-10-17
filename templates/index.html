@@ -14,6 +14,26 @@
 
 </head>
 <body>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">  	
+			        <a class="brand" href="javascript:void()">Twitter Feed App</a>  	
+		        	<form class="navbar-search pull-left tweet-search">  	
+					<input type="text" class="search-query" placeholder="Search">
+				</form>	  	
+			</div>  	
+		</div>  	
+	</div> 	
+	<div class="container main">  	
+		<div class="row">  	
+			<div class="offset2 span8">
+				<h4 class="title"></h4>
+				<div id="results" class="twitter-feed">
+					<ul id="tweets" class="unstyled tweets-result"/>
+				</div>
+			</div>
+		</div>  	
+	</div>
 	<script type="text/html" id="tweet-view">
  		<li class="tweet-item">
 		 	<%= text %> - <%= created_at %> 
