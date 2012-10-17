@@ -5,7 +5,6 @@ $(function(){
 			return m.link(m);
 		});
 	};
-
 	function relative_time(time_value) {
 		var values = time_value.split(" ");
 		// time_value = values[2] + " " + values[1] + ", " + values[3] + " " + values[5];
@@ -34,7 +33,6 @@ $(function(){
 		return r;
 	}
 
-
 	var TweetModel = Backbone.Model.extend({
 		initialize: function() {
 			var txt = this.get('text');
@@ -42,23 +40,23 @@ $(function(){
 			this.set('relative_time', relative_time(this.get('created_at')));
 		}
 	});
-
-	var TweetCollection = Backbone.Collection.extend({
+	
+	var TweetCollection = Backbone.Collection.extend(
+    {
         model: TweetModel,
         initialize: function() {
-
         },
-        url: function() {
-			return 'http://search.twitter.com/search.json?q=' + this.query +  '&page=' + this.page + '&callback=?';
-        },
-        query: '', //default query
-        page: '1',
-        parse: function(resp, xhr) {
-			return resp.results;
-        }
-
-    });
-
+	url: function () {
+	return 'http://search.twitter.com/search.json?q=' + this.query +  '&rpp=1000'  + '&callback=?';
+	},
+	query:"",
+	page: 1,
+	parse: function(resp, xhr)
+	{
+		return resp.results;
+	}
+	});
+	
 	var TweetController = Backbone.View.extend({
 		tagName: 'li',
 		events: {
@@ -92,41 +90,34 @@ $(function(){
 	});
 
 	var AppController = Backbone.View.extend({
-		events: {
-			'submit .tweet-search': 'onSearch'
-		},
 		initialize: function () {
 			this._tweetsView = [];
 			this.tweets = new TweetCollection();
+		
 
 			//set event handlers
 			_.bindAll(this, 'onTweetAdd');
 			this.tweets.bind('add', this.onTweetAdd);
+			//this.tweets.query= Searchvalue;
+			//this.loadTweets();
+			
 		},
 
 		loadTweets: function () {
 			var that = this;
-			this.tweets.query = this.$('.search-query').val();
+			//this.isloading = true;
+			//this.tweets.query="url"
 			this.tweets.fetch({
 				add: that.onTweetAdd,
-				success: function() {
-					$('.title').html('<span class="blue">' + that.tweets.length + '</span> results for: "' + that.tweets.query +'"');
-				}
+				success: function (tweets){
+				$('.title').html('<span class="blue">' + that.tweets.length + '</span> results for: "' + that.tweets.query +'"');
+			}
+			
+		
 			});
+		
 		},
-
-		onSearchh: function() {
-			alert('bug ako');
-		},
-
-		onSearch: function() {
-			this.tweets.query = this.$('.search-query').val();
-			this.tweets.reset();
-			this.$('.tweets-result li').remove();
-			this.loadTweets();
-			return false;
-		},
-
+	
 		onTweetAdd: function(model) {
 			console.log('tweet added', model.get('text'));
 			var tweetController = new TweetController({
@@ -136,12 +127,10 @@ $(function(){
 			//display tweet item
 			this._tweetsView.push(tweetController);
 			this.$('.tweets-result').append(tweetController.render().el);
-		}
+		}	});
 
-	});
 
 	window.app = new AppController({
 		el: $('body')
 	});
-
 });
