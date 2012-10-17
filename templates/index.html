@@ -14,34 +14,11 @@
 
 </head>
 <body>
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="brand" href="javascript:void()">Twitter Feed App</a>
-				<form class="navbar-search pull-left tweet-search">
-					<input type="text" class="search-query" placeholder="Search">
-				</form>
-			</div>
-		</div>
-	</div>
-	<div class="container main">
-		<div class="row">
-			<div class="offset2 span8">
-				<h4 class="title"></h4>
-				<div id="results" class="twitter-feed">
-					<ul id="tweets" class="unstyled tweets-result"/>
-				</div>
-			</div>
-		</div>
-
-	</div>
-
- 	<script type="text/html" id="tweet-view">
+	<script type="text/html" id="tweet-view">
  		<li class="tweet-item">
 		 	<%= text %> - <%= created_at %> 
 	 	</li>
-    </script>
-
+    	</script>
  	<script type="text/html" id="tweet-view-pic">
  		<li class="tweet-item well">
  			<div style="width: 100%;">
@@ -54,12 +31,12 @@
 	 			</div>
  			</div>
 	 	</li>
-    </script>
-    <script type="text/html" id="tweet-view-new">
+	</script>
+	<script type="text/html" id="tweet-view-new">
 		<li>
 			<div class="profile-pic"><a target="_blank" href="http://twitter.com/<%= from_user %>"><img class="author_image" src="<%= profile_image_url %>" alt=""></a></div>
-			<div class="tweet-body">
 				<div class="twitter-name"><a class="twitter-name-link" target="_blank" href="http://twitter.com/<%= from_user %>"><%= from_user %></a>&nbsp;&nbsp;<span></span></div>
+			<div class="tweet-body">
 				<div class="tweet"><%= text %><<a target="_blank" href="http://twitter.com/<%= from_user %>">@<%= from_user %></a></div>
 				<div class="actions">
 					<span class="icon tweet-icon"></span><%= relative_time %>&nbsp;&nbsp;&nbsp;
@@ -68,8 +45,8 @@
 					<a target="_blank" href="javascript:void(0)" class="tweet-favorite" title=""> Favorite </a>
 				</div>
 			</div>
-		</li>
-    </script>
+			<hr style="margin-top:30;"/>
+	</script>
  	<script type="text/html" id="tweet-view-two">
 	    <li class="tweet">
 	            <span>
@@ -86,7 +63,8 @@
 	                 <hr />
 	            </span>
 	   </li> 
-    </script>
+	</script>
+	<!--END NG TWITTER DISPLAY-->
 
 	<script src="/static/app.js" type="text/javascript"></script>
 </body>
